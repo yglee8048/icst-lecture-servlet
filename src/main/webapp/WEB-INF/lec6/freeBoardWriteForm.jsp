@@ -10,8 +10,9 @@
     <h1 class="text-center">게시글 작성</h1>
     <form action="<%=request.getContextPath()%>/lec6/free-board-write" method="post">
         <div class="form-group">
-            <label for="mid"><strong>작성자</strong></label>
-            <input class="form-control" type="text" id="mid" name="mid" value="<%=session.getAttribute(SessionKey.MEMBER_NAME)%>" disabled>
+            <label for="writerId"><strong>작성자</strong></label>
+            <input class="form-control" type="text" id="writerId" name="writerId"
+                   value="<%=session.getAttribute(SessionKey.MEMBER_NAME)%>" disabled>
         </div>
         <div class="form-group">
             <label for="content"><strong>내용</strong></label>

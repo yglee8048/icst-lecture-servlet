@@ -6,31 +6,31 @@ import java.sql.Date;
 
 public class FreeBoardDTO {
 
-    private Integer bNum;
+    private Long id;
     private String content;
+    private String writerId;
     private Date writeDate;
-    private String mid;
 
     public FreeBoardDTO(FreeBoardEntity freeBoardEntity) {
-        this.bNum = freeBoardEntity.getBNum();
+        this.id = freeBoardEntity.getId();
         this.content = freeBoardEntity.getContent();
+        this.writerId = freeBoardEntity.getWriterId();
         this.writeDate = freeBoardEntity.getWriteDate();
-        this.mid = freeBoardEntity.getMid();
     }
 
-    public Integer getBNum() {
-        return bNum;
+    public Long getId() {
+        return id;
     }
 
     public String getContent() {
         return content;
     }
 
-    public Date getWriteDate() {
-        return writeDate;
+    public String getWriterId() {
+        return writerId;
     }
 
-    public String getMid() {
-        return mid;
+    public Date getWriteDate() {
+        return writeDate;
     }
 }

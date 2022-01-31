@@ -1,4 +1,3 @@
-<%@ page import="com.lgcns.icst.lecture.servletjsp.lec6.constant.SessionKey" %>
 <%@ page import="com.lgcns.icst.lecture.servletjsp.lec6.model.dto.FreeBoardDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -14,12 +13,13 @@
     %>
     <form action="<%=request.getContextPath()%>/lec6/free-board-update" method="post">
         <div class="form-group">
-            <label for="bNum"></label>
-            <input type="text" id="bNum" name="bNum" value="<%=freeBoard.getBNum()%>" hidden>
+            <label for="id"></label>
+            <input type="text" id="id" name="id" value="<%=freeBoard.getId()%>" hidden>
         </div>
         <div class="form-group">
-            <label for="mid"><strong>작성자</strong></label>
-            <input class="form-control" type="text" id="mid" name="mid" value="<%=freeBoard.getMid()%>" disabled>
+            <label for="writerId"><strong>작성자</strong></label>
+            <input class="form-control" type="text" id="writerId" name="writerId"
+                   value="<%=freeBoard.getWriterId()%>" disabled>
         </div>
         <div class="form-group">
             <label for="content"><strong>내용</strong></label>

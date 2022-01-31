@@ -15,11 +15,11 @@ public class FreeBoardDeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String bNum = req.getParameter("bNum");
+        String id = req.getParameter("id");
 
         FreeBoardBiz freeBoardBiz = new FreeBoardBiz();
         try {
-            freeBoardBiz.delete(Integer.parseInt(bNum));
+            freeBoardBiz.delete(Long.parseLong(id));
 
             resp.sendRedirect(req.getContextPath() + "/lec6/free-board-list");
 

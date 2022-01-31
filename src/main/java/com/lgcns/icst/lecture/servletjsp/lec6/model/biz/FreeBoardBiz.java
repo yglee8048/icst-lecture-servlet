@@ -1,8 +1,8 @@
 package com.lgcns.icst.lecture.servletjsp.lec6.model.biz;
 
 import com.lgcns.icst.lecture.servletjsp.lec6.model.dao.FreeBoardDAO;
-import com.lgcns.icst.lecture.servletjsp.lec6.model.entity.FreeBoardEntity;
 import com.lgcns.icst.lecture.servletjsp.lec6.model.dto.FreeBoardDTO;
+import com.lgcns.icst.lecture.servletjsp.lec6.model.entity.FreeBoardEntity;
 import com.lgcns.icst.lecture.servletjsp.lec6.util.JdbcUtil;
 
 import java.sql.Connection;
@@ -37,7 +37,7 @@ public class FreeBoardBiz {
             if (result) {
                 JdbcUtil.commit(connection);
             } else {
-                throw new Exception("게시글 작성을 실패했습니다.");
+                throw new Exception("게시글 작성을 실패 했습니다.");
             }
         } catch (Exception e) {
             JdbcUtil.rollback(connection);
@@ -47,28 +47,28 @@ public class FreeBoardBiz {
         }
     }
 
-    public FreeBoardDTO findByBNum(Integer bNum) throws Exception {
+    public FreeBoardDTO findByBNum(Long id) throws Exception {
         FreeBoardDAO freeBoardDAO = new FreeBoardDAO();
         Connection connection = null;
         try {
             connection = JdbcUtil.getConnection();
-            FreeBoardEntity freeBoardEntity = freeBoardDAO.findFreeBoardByBNum(connection, bNum);
+            FreeBoardEntity freeBoardEntity = freeBoardDAO.findFreeBoardById(connection, id);
             return new FreeBoardDTO(freeBoardEntity);
         } finally {
             JdbcUtil.close(connection);
         }
     }
 
-    public void update(Integer bNum, String content) throws Exception {
+    public void update(Long id, String content) throws Exception {
         FreeBoardDAO freeBoardDAO = new FreeBoardDAO();
         Connection connection = null;
         try {
             connection = JdbcUtil.getConnection();
-            boolean result = freeBoardDAO.updateFreeBoard(connection, bNum, content);
+            boolean result = freeBoardDAO.updateFreeBoard(connection, id, content);
             if (result) {
                 JdbcUtil.commit(connection);
             } else {
-                throw new Exception("게시글이 변경되지 않았습니다.");
+                throw new Exception("게시글이 변경 되지 않았습니다.");
             }
         } catch (Exception e) {
             JdbcUtil.rollback(connection);
@@ -78,16 +78,16 @@ public class FreeBoardBiz {
         }
     }
 
-    public void delete(Integer bNum) throws Exception {
+    public void delete(Long id) throws Exception {
         FreeBoardDAO freeBoardDAO = new FreeBoardDAO();
         Connection connection = null;
         try {
             connection = JdbcUtil.getConnection();
-            boolean result = freeBoardDAO.deleteFreeBoard(connection, bNum);
+            boolean result = freeBoardDAO.deleteFreeBoardById(connection, id);
             if (result) {
                 JdbcUtil.commit(connection);
             } else {
-                throw new Exception("게시글 삭제를 실패했습니다.");
+                throw new Exception("게시글 삭제를 실패 했습니다.");
             }
         } catch (Exception e) {
             JdbcUtil.rollback(connection);

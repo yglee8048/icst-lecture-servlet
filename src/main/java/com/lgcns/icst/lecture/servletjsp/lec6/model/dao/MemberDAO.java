@@ -14,14 +14,14 @@ public class MemberDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "SELECT MEMBERPWD, MEMBERNAME FROM MEMBER WHERE MEMBERID = ?";
+            String sql = "SELECT MEMBER_PW, MEMBER_NAME FROM MEMBER WHERE MEMBER_ID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, memberId);
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String memberPassword = resultSet.getString("MEMBERPWD");
-                String memberName = resultSet.getString("MEMBERNAME");
+                String memberPassword = resultSet.getString("MEMBER_PW");
+                String memberName = resultSet.getString("MEMBER_NAME");
                 return new MemberEntity(memberId, memberPassword, memberName);
             }
         } finally {
@@ -35,10 +35,10 @@ public class MemberDAO {
     public boolean saveMember(Connection connection, MemberEntity memberEntity) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
-            String sql = "INSERT INTO MEMBER(MEMBERID, MEMBERPWD, MEMBERNAME) VALUES(?, ?, ?)";
+            String sql = "INSERT INTO MEMBER(MEMBER_ID, MEMBER_PW, MEMBER_NAME) VALUES(?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, memberEntity.getMemberId());
-            preparedStatement.setString(2, memberEntity.getMemberPwd());
+            preparedStatement.setString(2, memberEntity.getMemberPw());
             preparedStatement.setString(3, memberEntity.getMemberName());
 
             int result = preparedStatement.executeUpdate();

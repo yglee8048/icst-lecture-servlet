@@ -3,7 +3,11 @@ package com.lgcns.icst.lecture.servletjsp.lec6.model.dao;
 import com.lgcns.icst.lecture.servletjsp.lec6.model.entity.FreeBoardEntity;
 import com.lgcns.icst.lecture.servletjsp.lec6.util.JdbcUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,19 +20,19 @@ public class FreeBoardDAO {
         ResultSet resultSet = null;
         try {
             // 쿼리
-            String sql = "SELECT B_NUM, CONTENT, WRITE_DATE, MID FROM FREE_BOARD ORDER BY B_NUM DESC";
+            String sql = "SELECT ID, CONTENT, WRITER_ID, WRITE_DATE FROM FREE_BOARD ORDER BY ID DESC";
             // Statement 생성
             preparedStatement = connection.prepareStatement(sql);
 
             // 쿼리 수행
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int bNum = resultSet.getInt("B_NUM");
+                long id = resultSet.getLong("ID");
                 String content = resultSet.getString("CONTENT");
+                String writerId = resultSet.getString("WRITER_ID");
                 Date writeDate = resultSet.getDate("WRITE_DATE");
-                String mid = resultSet.getString("MID");
 
-                result.add(new FreeBoardEntity(bNum, content, writeDate, mid));
+                result.add(new FreeBoardEntity(id, content, writerId, writeDate));
             }
             return result;
 
@@ -44,7 +48,8 @@ public class FreeBoardDAO {
         PreparedStatement preparedStatement = null;
         try {
             // 쿼리
-            String sql = "INSERT INTO FREE_BOARD VALUES ((SELECT MAX(B_NUM) + 1 FROM FREE_BOARD), ?, SYSDATE, ?)";
+            String sql = "INSERT INTO FREE_BOARD(ID, CONTENT, WRITER_ID, WRITE_DATE) " +
+                    "VALUES ((SELECT MAX(ID) + 1 FROM FREE_BOARD), ?, ?, SYSDATE)";
             // Statement 생성
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, content);
@@ -55,29 +60,28 @@ public class FreeBoardDAO {
             System.out.println("result = " + result);
             return result == 1;
         } finally {
-            // 생성한 역순으로 반환(close)한다.
             JdbcUtil.close(preparedStatement);
         }
     }
 
-    public FreeBoardEntity findFreeBoardByBNum(Connection connection, Integer bNum) throws SQLException {
+    public FreeBoardEntity findFreeBoardById(Connection connection, Long id) throws SQLException {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
             // 쿼리
-            String sql = "SELECT CONTENT, WRITE_DATE, MID FROM FREE_BOARD WHERE B_NUM = ?";
+            String sql = "SELECT CONTENT, WRITER_ID, WRITE_DATE FROM FREE_BOARD WHERE ID = ?";
             // Statement 생성
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, bNum);
+            preparedStatement.setLong(1, id);
 
             // 쿼리 수행
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String content = resultSet.getString("CONTENT");
+                String writerId = resultSet.getString("WRITER_ID");
                 Date writeDate = resultSet.getDate("WRITE_DATE");
-                String mid = resultSet.getString("MID");
 
-                return new FreeBoardEntity(bNum, content, writeDate, mid);
+                return new FreeBoardEntity(id, content, writerId, writeDate);
             }
             return null;
 
@@ -88,13 +92,13 @@ public class FreeBoardDAO {
         }
     }
 
-    public boolean updateFreeBoard(Connection connection, Integer bNum, String content) throws SQLException {
+    public boolean updateFreeBoard(Connection connection, Long id, String content) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
-            String sql = "UPDATE FREE_BOARD SET CONTENT = ? AND WRITE_DATE = SYSDATE WHERE B_NUM = ?";
+            String sql = "UPDATE FREE_BOARD SET CONTENT = ? AND WRITE_DATE = SYSDATE WHERE ID = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, content);
-            preparedStatement.setInt(2, bNum);
+            preparedStatement.setLong(2, id);
 
             int result = preparedStatement.executeUpdate();
             return result == 1;
@@ -104,12 +108,12 @@ public class FreeBoardDAO {
         }
     }
 
-    public boolean deleteFreeBoard(Connection connection, Integer bNum) throws SQLException {
+    public boolean deleteFreeBoardById(Connection connection, Long id) throws SQLException {
         PreparedStatement preparedStatement = null;
         try {
-            String sql = "DELETE FROM FREE_BOARD WHERE B_NUM = ?";
+            String sql = "DELETE FROM FREE_BOARD WHERE ID = ?";
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, bNum);
+            preparedStatement.setLong(1, id);
 
             int result = preparedStatement.executeUpdate();
             return result == 1;

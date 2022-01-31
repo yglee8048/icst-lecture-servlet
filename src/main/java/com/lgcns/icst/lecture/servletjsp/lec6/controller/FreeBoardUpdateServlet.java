@@ -16,11 +16,11 @@ public class FreeBoardUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String bNum = req.getParameter("bNum");
+        String id = req.getParameter("id");
 
         FreeBoardBiz freeBoardBiz = new FreeBoardBiz();
         try {
-            FreeBoardDTO freeBoard = freeBoardBiz.findByBNum(Integer.parseInt(bNum));
+            FreeBoardDTO freeBoard = freeBoardBiz.findByBNum(Long.parseLong(id));
             req.setAttribute("freeBoard", freeBoard);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/lec6/freeBoardUpdateForm.jsp");
@@ -36,12 +36,12 @@ public class FreeBoardUpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String bNum = req.getParameter("bNum");
+        String id = req.getParameter("id");
         String content = req.getParameter("content");
 
         FreeBoardBiz freeBoardBiz = new FreeBoardBiz();
         try {
-            freeBoardBiz.update(Integer.parseInt(bNum), content);
+            freeBoardBiz.update(Long.parseLong(id), content);
 
             resp.sendRedirect(req.getContextPath() + "/lec6/free-board-list");
 

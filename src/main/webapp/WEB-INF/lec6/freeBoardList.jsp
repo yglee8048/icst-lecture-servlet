@@ -36,23 +36,23 @@
             for (FreeBoardDTO freeBoard : freeBoards) {
         %>
         <tr>
-            <td><%= freeBoard.getBNum() %>
+            <td><%= freeBoard.getId() %>
             </td>
             <td><%= freeBoard.getContent() %>
             </td>
-            <td><%= freeBoard.getMid() %>
+            <td><%= freeBoard.getWriterId() %>
             </td>
             <td><%= freeBoard.getWriteDate() %>
             </td>
             <td>
                 <button type="button" class="btn btn-success"
-                        onclick="location.href='<%=request.getContextPath()%>/lec6/free-board-update?bNum=<%=freeBoard.getBNum()%>'">
+                        onclick="location.href='<%=request.getContextPath()%>/lec6/free-board-update?id=<%=freeBoard.getId()%>'">
                     수정
                 </button>
             </td>
             <td>
                 <button type="button" class="btn btn-danger"
-                        onclick="location.href='<%=request.getContextPath()%>/lec6/free-board-delete?bNum=<%=freeBoard.getBNum()%>'">
+                        onclick="location.href='<%=request.getContextPath()%>/lec6/free-board-delete?id=<%=freeBoard.getId()%>'">
                     삭제
                 </button>
             </td>

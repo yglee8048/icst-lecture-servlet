@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @Component
 public class JdbcUtil {
@@ -20,7 +24,8 @@ public class JdbcUtil {
         // JDBC Driver 로딩
         Class.forName("oracle.jdbc.OracleDriver");
         // Connection 획득 (본인의 아이디와 비밀번호 사용)
-        Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@10.100.70.7:1521:XE", "mission303", "mission303");
+        final String URL = "jdbc:oracle:thin:@10.100.70.7:1521:XE";
+        Connection connection = DriverManager.getConnection(URL, "student#", "student#");
         return connection;
     }
 

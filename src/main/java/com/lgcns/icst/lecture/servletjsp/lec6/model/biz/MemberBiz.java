@@ -19,7 +19,7 @@ public class MemberBiz {
 
             if (member == null) {
                 throw new Exception("존재하지 않는 아이디입니다.");
-            } else if (!member.getMemberPwd().equals(memberPassword)) {
+            } else if (!member.getMemberPw().equals(memberPassword)) {
                 throw new Exception("비밀번호가 일치하지 않습니다.");
             } else {
                 return new MemberDTO(memberId, memberPassword, member.getMemberName());
