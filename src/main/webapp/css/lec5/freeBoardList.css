@@ -1,0 +1,13 @@
+h2 {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.table-bordered {
+    border: 1px solid #ddd !important;
+}
+
+p {
+    padding-top: 10px;
+    font-size: 14px;
+}

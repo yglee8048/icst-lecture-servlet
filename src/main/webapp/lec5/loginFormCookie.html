@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/servlet-jsp/css/lec5/loginForm.css">
+    <title>로그인</title>
+</head>
+<body>
+<form action="/servlet-jsp/lec5/login-cookie" method="post">
+    <h1>로그인</h1>
+    <div class="form-container">
+        <hr/>
+        <div class="container">
+            <label for="username"><strong>Username</strong></label>
+            <input type="text" placeholder="Enter Username" id="username" name="username" required>
+            <label for="password"><strong>Password</strong></label>
+            <input type="password" placeholder="Enter Password" id="password" name="password" required>
+        </div>
+        <button type="submit">Login</button>
+    </div>
+</form>
+</body>
+</html>
