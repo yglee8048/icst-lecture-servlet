@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "jdbcFreeBoardServlet", urlPatterns = "/free-board-jdbc")
+@WebServlet(name = "jdbcFreeBoardServlet-lec4", urlPatterns = "/lec4/free-board-jdbc")
 public class JdbcFreeBoardServlet extends HttpServlet {
 
     @Override
@@ -22,17 +22,17 @@ public class JdbcFreeBoardServlet extends HttpServlet {
         req.setAttribute("freeBoards", freeBoards);
 
         // forward
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/freeBoardListCookie.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/freeBoardList.jsp");
         requestDispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String content = req.getParameter("content");
-        String mid = req.getParameter("mid");
+        String writerId = req.getParameter("writerId");
 
         FreeBoardDataAccess freeBoardDataAccess = new FreeBoardDataAccess();
-        boolean success = freeBoardDataAccess.insertFreeBoard(content, mid);
+        boolean success = freeBoardDataAccess.insertFreeBoard(content, writerId);
 
         String url;
         if (success) {

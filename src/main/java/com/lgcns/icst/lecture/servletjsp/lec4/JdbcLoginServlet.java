@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "jdbcLoginServlet", urlPatterns = "/login-jdbc")
+@WebServlet(name = "jdbcLoginServlet-lec4", urlPatterns = "/lec4/login-jdbc")
 public class JdbcLoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/loginFormSession.html");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/loginForm.html");
         requestDispatcher.forward(req, resp);
     }
 
@@ -29,10 +29,10 @@ public class JdbcLoginServlet extends HttpServlet {
         if (memberEntity != null) {
             req.setAttribute("memberName", memberEntity.getMemberName());
 
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/loginSuccessCookie.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/loginSuccess.jsp");
             requestDispatcher.forward(req, resp);
         } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/errorPage.jsp");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec4/loginFail.jsp");
             requestDispatcher.forward(req, resp);
         }
     }

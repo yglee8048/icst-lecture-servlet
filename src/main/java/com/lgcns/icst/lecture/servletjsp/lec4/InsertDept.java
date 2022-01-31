@@ -18,7 +18,7 @@ public class InsertDept {
             // JDBC Driver 로딩
             Class.forName(DRIVER);
             // Connection 획득 (본인의 아이디와 비밀번호 사용)
-            connection = DriverManager.getConnection(URL, "mission303", "mission303");
+            connection = DriverManager.getConnection(URL, "student#", "student#");
             // auto commit = false 로 설정
             connection.setAutoCommit(false);
 
@@ -30,7 +30,7 @@ public class InsertDept {
             // 쿼리 수행
             int result = statement.executeUpdate(sql);
             System.out.println("result = " + result);
-            if (result < 1) {
+            if (result != 1) {
                 System.out.println("fail!");
                 connection.rollback();  // 실패 시 rollback 처리한다
             } else {

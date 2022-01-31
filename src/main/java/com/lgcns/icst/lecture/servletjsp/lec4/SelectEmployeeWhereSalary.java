@@ -16,7 +16,7 @@ public class SelectEmployeeWhereSalary {
             // JDBC Driver 로딩
             Class.forName(DRIVER);
             // Connection 획득 (본인의 아이디와 비밀번호 사용)
-            connection = DriverManager.getConnection(URL, "mission303", "mission303");
+            connection = DriverManager.getConnection(URL, "student#", "student#");
 
             // 쿼리
             String sql = "SELECT EMP_NO, EMP_NAME, EMP_ANNUALSALARY FROM TBL_EMPLOYEE WHERE EMP_ANNUALSALARY >= 55000000";

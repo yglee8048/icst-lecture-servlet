@@ -18,7 +18,7 @@ public class UpdateDeptByPreparedStmt {
             // JDBC Driver 로딩
             Class.forName(DRIVER);
             // Connection 획득 (본인의 아이디와 비밀번호 사용)
-            connection = DriverManager.getConnection(URL, "mission303", "mission303");
+            connection = DriverManager.getConnection(URL, "student#", "student#");
 
             // 쿼리
             String sql = "UPDATE TBL_DEPARTMENT SET DEPT_NAME = ? WHERE DEPT_NAME = ?";
@@ -29,17 +29,15 @@ public class UpdateDeptByPreparedStmt {
             statement.setString(2, "모바일개발팀");
 
             // 쿼리 수행
-            int result = statement.executeUpdate();
+            int result = statement.executeUpdate(); // 주의! executeUpdate(sql) 을 수행하면 statement 바인딩이 누락된다!
             System.out.println("result = " + result);
-            if (result < 1) {
+            if (result != 1) {
                 System.out.println("fail!");
             } else {
                 System.out.println("success!");
             }
-
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-
         } finally {
             // 생성한 역순으로 반환(close)한다.
             if (statement != null) {

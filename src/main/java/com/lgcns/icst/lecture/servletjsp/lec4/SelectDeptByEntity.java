@@ -20,7 +20,7 @@ public class SelectDeptByEntity {
             // JDBC Driver 로딩
             Class.forName(DRIVER);
             // Connection 획득 (본인의 아이디와 비밀번호 사용)
-            connection = DriverManager.getConnection(URL, "mission303", "mission303");
+            connection = DriverManager.getConnection(URL, "student#", "student#");
 
             // 쿼리
             String sql = "SELECT DISTINCT D.DEPT_ID, D.DEPT_NAME, D.DIVISION_ID, D.REGION_ID FROM TBL_DEPARTMENT D " +
@@ -41,7 +41,6 @@ public class SelectDeptByEntity {
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-
         } finally {
             // 생성한 역순으로 반환(close)한다.
             if (resultSet != null) {
@@ -66,6 +65,6 @@ public class SelectDeptByEntity {
                 }
             }
         }
-        return result;
+        return result;  // 에러가 catch 된 경우에도 return 하기 위해 마지막에 적는다.
     }
 }
