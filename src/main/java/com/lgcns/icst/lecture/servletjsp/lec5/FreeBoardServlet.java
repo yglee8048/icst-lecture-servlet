@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "lec5FreeBoardServlet", urlPatterns = "/lec5/free-board")
-public class Lec5FreeBoardServlet extends HttpServlet {
+@WebServlet(name = "freeBoardServlet-lec5", urlPatterns = "/lec5/free-board")
+public class FreeBoardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,6 +20,7 @@ public class Lec5FreeBoardServlet extends HttpServlet {
 
         req.setAttribute("freeBoards", freeBoards);
 
+//        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec5/freeBoardListCookie.jsp");
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec5/freeBoardListSession.jsp");
         requestDispatcher.forward(req, resp);
     }

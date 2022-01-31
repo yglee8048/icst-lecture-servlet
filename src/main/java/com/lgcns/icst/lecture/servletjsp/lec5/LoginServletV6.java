@@ -14,7 +14,7 @@ public class LoginServletV6 extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec5/loginFormV5.html");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec5/loginFormV6.html");
         requestDispatcher.forward(req, resp);
     }
 

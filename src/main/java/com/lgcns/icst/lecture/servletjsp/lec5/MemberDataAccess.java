@@ -4,24 +4,28 @@ import java.sql.*;
 
 public class MemberDataAccess {
 
-    public MemberEntity findMemberByIdAndPassword(String memberId, String memberPassword) {
+    public MemberEntity findMemberByIdAndPassword(String memberId, String memberPw) {
+        final String DRIVER = "oracle.jdbc.OracleDriver";
+        final String URL = "jdbc:oracle:thin:@10.100.70.7:1521:XE";
 
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            Class.forName("oracle.jdbc.OracleDriver");
-            connection = DriverManager.getConnection("jdbc:oracle:thin:@10.100.70.7:1521:XE", "mission303", "mission303");
+            // JDBC Driver 로딩
+            Class.forName(DRIVER);
+            // Connection 획득 (본인의 아이디와 비밀번호 사용)
+            connection = DriverManager.getConnection(URL, "student#", "student#");
 
-            String sql = "SELECT MEMBERNAME FROM MEMBER WHERE MEMBERID = ? AND MEMBERPWD = ?";
+            String sql = "SELECT MEMBER_NAME FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, memberId);
-            preparedStatement.setString(2, memberPassword);
+            preparedStatement.setString(2, memberPw);
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                String memberName = resultSet.getString("MEMBERNAME");
-                return new MemberEntity(memberId, memberPassword, memberName);
+                String memberName = resultSet.getString("MEMBER_NAME");
+                return new MemberEntity(memberId, memberPw, memberName);
             }
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();

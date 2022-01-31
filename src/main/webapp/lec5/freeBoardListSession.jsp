@@ -37,11 +37,11 @@
             for (FreeBoardEntity freeBoard : freeBoards) {
         %>
         <tr>
-            <td><%= freeBoard.getBNum() %>
+            <td><%= freeBoard.getId() %>
             </td>
             <td><%= freeBoard.getContent() %>
             </td>
-            <td><%= freeBoard.getMid() %>
+            <td><%= freeBoard.getWriterId() %>
             </td>
             <td><%= freeBoard.getWriteDate() %>
             </td>
