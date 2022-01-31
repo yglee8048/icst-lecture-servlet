@@ -13,7 +13,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec3/loginFormSession.html");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec3/loginForm.html");
         requestDispatcher.forward(req, resp);
     }
 
@@ -24,13 +24,13 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         if (username.equals("홍길동") && password.equals("12345")) {
-            forwardURL = "/lec3/loginSuccessCookie.jsp";
+            forwardURL = "/lec3/loginSuccess.jsp";
 
             req.setAttribute("username", username);
             req.setAttribute("password", password);
 
         } else {
-            forwardURL = "/lec3/errorPage.html";
+            forwardURL = "/lec3/loginFail.jsp";
         }
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(forwardURL);

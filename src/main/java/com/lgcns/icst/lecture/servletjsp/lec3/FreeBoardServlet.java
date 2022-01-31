@@ -20,7 +20,7 @@ public class FreeBoardServlet extends HttpServlet {
         List<FreeBoard> freeBoards = FreeBoardData.findAll();
         req.setAttribute("freeBoards", freeBoards);
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec3/freeBoardListCookie.jsp");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec3/freeBoard.jsp");
         requestDispatcher.forward(req, resp);
     }
 
