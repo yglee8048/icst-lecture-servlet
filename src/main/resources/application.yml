@@ -11,4 +11,7 @@ spring:
     password: icstroot
     hikari:
       auto-commit: false
-      maximum-pool-size: 5
+    oracleucp:
+      max-pool-size: 5
+      initial-pool-size: 3
+      min-pool-size: 2

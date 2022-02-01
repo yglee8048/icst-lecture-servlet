@@ -20,7 +20,7 @@ public class FreeBoardUpdateServlet extends HttpServlet {
 
         FreeBoardBiz freeBoardBiz = new FreeBoardBiz();
         try {
-            FreeBoardDTO freeBoard = freeBoardBiz.findByBNum(Long.parseLong(id));
+            FreeBoardDTO freeBoard = freeBoardBiz.findById(Long.parseLong(id));
             req.setAttribute("freeBoard", freeBoard);
 
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/WEB-INF/lec6/freeBoardUpdateForm.jsp");

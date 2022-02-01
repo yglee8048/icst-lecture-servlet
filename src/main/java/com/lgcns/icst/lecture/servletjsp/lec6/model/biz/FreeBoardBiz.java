@@ -47,7 +47,7 @@ public class FreeBoardBiz {
         }
     }
 
-    public FreeBoardDTO findByBNum(Long id) throws Exception {
+    public FreeBoardDTO findById(Long id) throws Exception {
         FreeBoardDAO freeBoardDAO = new FreeBoardDAO();
         Connection connection = null;
         try {
