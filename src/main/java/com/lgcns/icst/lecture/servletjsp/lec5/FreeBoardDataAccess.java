@@ -85,7 +85,7 @@ public class FreeBoardDataAccess {
 
             // 쿼리
             String sql = "INSERT INTO FREE_BOARD(ID, CONTENT, WRITER_ID, WRITE_DATE) " +
-                    "VALUES ((SELECT MAX(ID) + 1 FROM FREE_BOARD), ?, ?, SYSDATE)";
+                    "VALUES ((SELECT NVL(MAX(ID),0) + 1 FROM FREE_BOARD), ?, ?, SYSDATE)";
             // Statement 생성
             statement = connection.prepareStatement(sql);
             statement.setString(1, content);

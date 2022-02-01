@@ -49,7 +49,7 @@ public class FreeBoardDAO {
         try {
             // 쿼리
             String sql = "INSERT INTO FREE_BOARD(ID, CONTENT, WRITER_ID, WRITE_DATE) " +
-                    "VALUES ((SELECT MAX(ID) + 1 FROM FREE_BOARD), ?, ?, SYSDATE)";
+                    "VALUES ((SELECT NVL(MAX(ID),0) + 1 FROM FREE_BOARD), ?, ?, SYSDATE)";
             // Statement 생성
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, content);
