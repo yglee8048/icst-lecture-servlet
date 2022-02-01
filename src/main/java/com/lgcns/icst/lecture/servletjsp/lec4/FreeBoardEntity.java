@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class FreeBoardEntity {
 
-    private final Long id;
+    private Long id;
     private String content;
     private String writerId;
     private Date writeDate;

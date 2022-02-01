@@ -2,7 +2,7 @@ package com.lgcns.icst.lecture.servletjsp.lec4;
 
 public class DepartmentEntity {
 
-    private final String deptId;
+    private String deptId;
     private String deptName;
     private String divisionId;
     private String regionId;
