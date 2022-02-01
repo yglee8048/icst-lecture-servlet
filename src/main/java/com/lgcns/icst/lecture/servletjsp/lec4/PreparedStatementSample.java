@@ -1,19 +1,19 @@
 package com.lgcns.icst.lecture.servletjsp.lec4;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class SelectDeptByEntity {
+public class PreparedStatementSample {
 
-    public List<DepartmentEntity> findAllDeptHasEmployee() {
-        List<DepartmentEntity> result = new ArrayList<>();
-
+    public static void main(String[] args) {
         final String DRIVER = "oracle.jdbc.OracleDriver";
         final String URL = "jdbc:oracle:thin:@10.100.70.7:1521:XE";
 
         Connection connection = null;
-        PreparedStatement statement = null;
+        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
@@ -23,22 +23,20 @@ public class SelectDeptByEntity {
             connection = DriverManager.getConnection(URL, "student#", "student#");
 
             // 쿼리
-            String sql = "SELECT DISTINCT D.DEPT_ID, D.DEPT_NAME, D.DIVISION_ID, D.REGION_ID FROM TBL_DEPARTMENT D " +
-                    "LEFT JOIN TBL_EMPLOYEE TE on D.DEPT_ID = TE.EMP_DEPTID " +
-                    "WHERE TE.EMP_NO IS NOT NULL";
+            String sql = "SELECT DEPT_ID, DEPT_NAME, DIVISION_ID, REGION_ID FROM TBL_DEPARTMENT WHERE DEPT_ID = ?";
             // Statement 생성
-            statement = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "T01");
 
             // 쿼리 수행
-            resultSet = statement.executeQuery();
+            resultSet = preparedStatement.executeQuery();   // sql 을 넣으면 안 된다!
+//            int result = preparedStatement.executeUpdate();
+
             while (resultSet.next()) {
                 String deptId = resultSet.getString("DEPT_ID");
-                String deptName = resultSet.getString("DEPT_NAME");
-                String divisionId = resultSet.getString("DIVISION_ID");
-                String regionId = resultSet.getString("REGION_ID");
-
-                result.add(new DepartmentEntity(deptId, deptName, divisionId, regionId));
+                System.out.println("deptId = " + deptId);
             }
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
@@ -50,9 +48,9 @@ public class SelectDeptByEntity {
                     e.printStackTrace();
                 }
             }
-            if (statement != null) {
+            if (preparedStatement != null) {
                 try {
-                    statement.close();
+                    preparedStatement.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -65,6 +63,5 @@ public class SelectDeptByEntity {
                 }
             }
         }
-        return result;  // 에러가 catch 된 경우에도 return 하기 위해 마지막에 적는다.
     }
 }

@@ -1,8 +1,12 @@
 package com.lgcns.icst.lecture.servletjsp.lec4;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class SelectEmployeeWhereSalary {
+public class DataAccessSample {
 
     public static void main(String[] args) {
         final String DRIVER = "oracle.jdbc.OracleDriver";
@@ -19,23 +23,21 @@ public class SelectEmployeeWhereSalary {
             connection = DriverManager.getConnection(URL, "student#", "student#");
 
             // 쿼리
-            String sql = "SELECT EMP_NO, EMP_NAME, EMP_ANNUALSALARY FROM TBL_EMPLOYEE WHERE EMP_ANNUALSALARY >= 55000000";
+            String sql = "SELECT DEPT_ID, DEPT_NAME, DIVISION_ID, REGION_ID FROM TBL_DEPARTMENT";
             // Statement 생성
             statement = connection.createStatement();
 
             // 쿼리 수행
             resultSet = statement.executeQuery(sql);
-            // 수행 결과 출력
+//            int result = statement.executeUpdate(sql);
+
             while (resultSet.next()) {
-                String empNo = resultSet.getString("EMP_NO");
-                String empName = resultSet.getString("EMP_NAME");
-                int annualSalary = resultSet.getInt("EMP_ANNUALSALARY");
-                System.out.println(empNo + ", " + empName + ", " + annualSalary);
+                String deptId = resultSet.getString("DEPT_ID");
+                System.out.println("deptId = " + deptId);
             }
 
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
-
         } finally {
             // 생성한 역순으로 반환(close)한다.
             if (resultSet != null) {

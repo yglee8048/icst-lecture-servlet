@@ -29,21 +29,12 @@
     <th>내용</th>
     <th>작성자</th>
     <th>작성시간</th>
-    <%
-        List<FreeBoard> freeBoards = (List<FreeBoard>) request.getAttribute("freeBoards");
-        for (FreeBoard freeBoard : freeBoards) {
-    %>
     <tr>
-        <td><%=freeBoard.getId()%>
-        </td>
-        <td><%=freeBoard.getTitle()%>
-        </td>
-        <td><%=freeBoard.getContent()%>
-        </td>
-        <td><%=freeBoard.getCreatedBy()%>
-        </td>
-        <td><%=freeBoard.getCreatedAt()%>
-        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
     </tr>
     <%
         }
