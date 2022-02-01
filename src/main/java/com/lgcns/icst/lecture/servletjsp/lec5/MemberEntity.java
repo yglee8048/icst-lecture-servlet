@@ -2,7 +2,7 @@ package com.lgcns.icst.lecture.servletjsp.lec5;
 
 public class MemberEntity {
 
-    private final String memberId;
+    private String memberId;
     private String memberPw;
     private String memberName;
 

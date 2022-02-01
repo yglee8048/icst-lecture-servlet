@@ -1,11 +1,9 @@
-package com.lgcns.icst.lecture.servletjsp.lec6.controller;
+package com.lgcns.icst.lecture.servletjsp.lec6.servlet;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet(name = "logoutServlet-lec6", urlPatterns = "/lec6/logout")
@@ -13,9 +11,12 @@ public class LogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // session 로그아웃 하기
         HttpSession session = req.getSession();
         session.invalidate();
+        System.out.println("로그 아웃!");
 
-        resp.sendRedirect(req.getContextPath() + "/lec6/login");
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/lec6/logout.html");
+        requestDispatcher.forward(req, resp);
     }
 }

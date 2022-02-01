@@ -1,6 +1,6 @@
 package com.lgcns.icst.lecture.servletjsp.lec6;
 
-import com.lgcns.icst.lecture.servletjsp.lec5.FreeBoardEntity;
+import com.lgcns.icst.lecture.servletjsp.lec6.model.entity.FreeBoardEntity;
 
 import java.sql.Connection;
 import java.sql.Date;

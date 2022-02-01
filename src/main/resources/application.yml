@@ -6,9 +6,9 @@ server:
 spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@ics-t-development.cztekutconfc.ap-northeast-2.rds.amazonaws.com:1521:ORCL
-    username: root
-    password: icstroot
+    url: jdbc:oracle:thin:@10.100.70.7:1521:XE
+    username: student##
+    password: student##
     hikari:
       auto-commit: false
     oracleucp:

@@ -1,6 +1,7 @@
 package com.lgcns.icst.lecture.servletjsp.lec6;
 
-import com.lgcns.icst.lecture.servletjsp.lec5.MemberEntity;
+
+import com.lgcns.icst.lecture.servletjsp.lec6.model.entity.MemberEntity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
