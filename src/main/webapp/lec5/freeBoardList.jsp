@@ -10,21 +10,10 @@
 <body>
 
 <h2>게시판</h2>
-<%
-    String memberName = null;
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null) {
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("memberName")) {
-                memberName = cookie.getValue();
-            }
-        }
-    }
-%>
 <div class="col-xs-12">
     <div>
         <p>
-            <strong><%= memberName %>
+            <strong> <%-- <%= memberName %> --%>
             </strong> 님 안녕하세요.
             <a href="<%=request.getContextPath()%>/lec5/logout">로그아웃</a>
         </p>
